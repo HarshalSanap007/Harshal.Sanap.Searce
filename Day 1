@@ -1,0 +1,154 @@
+Question 1
+
+An array is a data structure that keeps items of the same kind in a single memory block. Each memory position in an array, P, of size Q, has a unique index, I (where 0=i=Q), which may be referred as P[i] or Pi. Reverse an integer array.
+
+Example 
+P=[4,5,6]
+Return [6,5,4]
+
+Reverse an integer array. Description of the Function
+
+complete the reverseArray function in any programming language or your choice or you may write sudo code for the same
+
+The parameter(s) for reverseArray are:
+int P [q]: the array to reverse  
+
+Returns
+Int[q]: the reversed array
+
+Input format
+The first line includes an integer, Q, which represents the number of integers in P.
+P is made up of Q space-separated numbers on the second line.
+
+Constraints
+1<=Q<=103
+1<=p[i]<=104 where p[i]  is the ith integer in P
+Sample input 
+
+5
+8
+7
+6
+
+
+
+Sample output
+
+6
+7
+8
+5
+
+
+Code for this :
+(Java)
+
+import java.util.Scanner;
+public class array_reverse {
+    static void reverseArray(int P[],int start ,int end){
+        int temp;
+        while(start<end){
+            temp=P[start];
+            P[start]=P[end];
+            P[end]=temp;
+            start++;
+            end--;
+
+        }
+
+
+    }
+    static void printArray(int P[],int Q){
+        for(int i=0;i<Q;i++){
+            System.out.print(P[i]+" ");
+            System.out.println();
+
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println("Enter the size of array");
+        Scanner sc=new Scanner(System.in);
+        int Q=sc.nextInt();
+        System.out.println("Enter the elements of an array");
+        int P[]=new int[Q];
+        for(int i=0;i<Q;i++){
+            P[i]=sc.nextInt();
+        }
+        
+        printArray(P,Q);
+        System.out.println("The reversed array is  :");
+        reverseArray(P,0,Q-1);
+        printArray(P,Q);
+        
+    }
+    
+}
+/************************************************************************************************/
+Question 2
+
+This is a good way to get some practise with traversing a linked list. Print each node's data element, one per line, given a pointer to the head node of a linked list. There is nothing to output if the head reference is null (meaning the list is empty).
+
+Create a function to print LinkedLists.
+
+The parameter(s) for printLinkedList are as follows:
+SinglyLinkedList The head of the list is referred to as the node head.
+Print the value of each node in a new line
+
+Input format
+The first line of input contains p, which is the number of linked list entries. The data values for each node are contained in the next p lines, each with one element.
+
+
+Complete the  printlinkedlist  in any programming language or your choice or you may write sudo code for the same
+
+Constraints
+1<=P<=1000
+1<=list[i]<=1000 where list [i] is the ith element of the linked list
+
+
+Code for this :
+C language (I use C for DSA)
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *next;
+};
+
+void printLinkedList(struct Node *ptr)
+{
+    while (ptr != NULL)
+    {
+        printf("Element: %d\n", ptr->data);
+        ptr = ptr->next;
+    }
+}
+
+int main()
+{
+    struct Node *head;
+    struct Node *second;
+    struct Node *third;
+    struct Node *fourth;
+
+    head = (struct Node *)malloc(sizeof(struct Node));
+    second = (struct Node *)malloc(sizeof(struct Node));
+    third = (struct Node *)malloc(sizeof(struct Node));
+    fourth = (struct Node *)malloc(sizeof(struct Node));
+
+    head->data = 80;
+    head->next = second;
+
+    second->data = 50;
+    second->next = third;
+
+    third->data = 461;
+    third->next = fourth;
+
+    fourth->data = 65;
+    fourth->next = NULL;
+
+    printLinkedList(head);
+    return 0;
+}
