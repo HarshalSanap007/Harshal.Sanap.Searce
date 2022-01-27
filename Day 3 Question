@@ -1,0 +1,82 @@
+Ramu owns a Pan shop and he manages it in his own way. While in a normal shop, a customer is served by following the first-come, first-served rule, Ramu simply minimizes the average waiting time of his customers. So he gets to decide who is served first, regardless of how sooner or later a person comes.
+
+Different kinds of Pans take different amounts of time to cook. Also, once he starts cooking a Pan, he cannot cook another Pan until the first Pan is completely cooked. Let's say we have three customers who come at time t=0, t=1, & t=2 respectively, and the time needed to cook their Pans is 3, 9, & 6 respectively. If Ramu applies first-come, first-served rule, then the waiting time of three customers is 3, 11, & 16 respectively. The average waiting time in this case is (3 + 11 + 16) / 3 = 10. This is not an optimized solution. After serving the first customer at time t=3, Ramu can choose to serve the third customer. In that case, the waiting time will be 3, 7, & 17 respectively. Hence the average waiting time is (3 + 7 + 17) / 3 = 9.
+
+Help Ramu achieve the minimum average waiting time. For the sake of simplicity, just find the integer part of the minimum average waiting time.
+
+
+Input Format
+The first line contains an integer N, which is the number of customers.
+In the next N lines, the ith line contains two space separated numbers Ti and Li. Ti is the time when ith customer order a pan and Li is the time required to cook that pan.
+The  ith customer is not the customer arriving at the  ith arrival time. 
+
+Output Format
+Display the integer part of the minimum average waiting time.
+Note
+The waiting time is calculated as the difference between the time a customer orders pan (the time at which they enter the shop) and the time she is served.
+Cook does not know about the future orders.
+
+
+*******************************************************************************************************************************************************************************************
+Ans :
+// Ive coded in Java:
+
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
+
+public class Solution {
+    private static long computeMinAvg(NavigableMap<Long, List<Customer>> ordersByTime) {
+        PriorityQueue<Customer> waitingCustomers = new PriorityQueue<>();
+        long currTime = 0;
+        long totalWaitTime = 0;
+
+        while (!ordersByTime.isEmpty() || !waitingCustomers.isEmpty()) {
+            if (waitingCustomers.isEmpty()) {
+                Entry<Long, List<Customer>> firstEntry = ordersByTime.pollFirstEntry();
+                waitingCustomers.addAll(firstEntry.getValue());
+                currTime = firstEntry.getKey();
+            } else {
+                Customer nextToCook = waitingCustomers.poll();
+                currTime += nextToCook.cookTime;
+                totalWaitTime += currTime - nextToCook.arrivalTime;
+                NavigableMap<Long, List<Customer>> arrivals = ordersByTime.headMap(currTime, true);
+                arrivals.values()
+                        .stream()
+                        .forEach(waitingCustomers::addAll);
+                arrivals.clear();
+            }
+        }
+        return totalWaitTime;
+    }
+
+    private static class Customer implements Comparable<Customer> {
+        final long arrivalTime;
+        final Long cookTime;
+
+        Customer(long arrivalTime, long cookTime) {
+            this.arrivalTime = arrivalTime;
+            this.cookTime = cookTime;
+        }
+
+        @Override
+        public int compareTo(Customer o) {
+            return cookTime.compareTo(o.cookTime);
+        }
+    }
+
+    public static void main(String[] args) {
+        try (Scanner in = new Scanner(System.in)) {
+            int n = in.nextInt();
+
+            NavigableMap<Long, List<Customer>> ordersByTime = new TreeMap<>();
+            for (int i = 0; i < n; i++) {
+                Customer customer = new Customer(in.nextInt(), in.nextInt());
+                ordersByTime.computeIfAbsent(customer.arrivalTime,
+                                             a -> new ArrayList<>())
+                            .add(customer);
+            }
+            System.out.println(computeMinAvg(ordersByTime) / n);
+        }
+    }
+}
