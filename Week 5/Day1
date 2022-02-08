@@ -1,0 +1,61 @@
+Day 1:
+
+Starting Python Practice
+To print:
+
+print("Hello, World!")
+Hello, World!
+
+Create a Tuple:
+
+thistuple = ("apple", "banana", "cherry")
+print(thistuple)
+
+thistuple = ("apple", "banana", "cherry")
+print(thistuple[1])
+
+thistuple = ("apple", "banana", "cherry")
+print(thistuple[-1])
+
+x = ("apple", "banana", "cherry")
+y = list(x)
+y[1] = "kiwi"
+x = tuple(y)
+
+print(x)
+
+fruits = ("apple", "banana", "cherry")
+
+fruits = ("apple", "banana", "cherry")
+
+(green, yellow, red) = fruits
+
+print(green)
+print(yellow)
+print(red)
+
+Create a Set:
+
+thisset = {"apple", "banana", "cherry"}
+print(thisset)
+
+thisset = {"apple", "banana", "cherry"}
+
+for x in thisset:
+  print(x)
+  
+  Add an item to a set, using the add() method:
+
+thisset = {"apple", "banana", "cherry"}
+
+thisset.add("orange")
+
+print(thisset)
+
+Remove "banana" by using the remove() method:
+
+thisset = {"apple", "banana", "cherry"}
+
+thisset.remove("banana")
+
+print(thisset
