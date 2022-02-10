@@ -1,0 +1,16 @@
+Debugging Tips:
+What is a Bug:
+What is a bug?
+In computer technology, a bug is a coding error in a computer program.
+(We consider a program to also include the microcode that is manufactured into a microprocessor.)
+The process of finding bugs -- before users do -- is called debugging. Debugging starts after the code is written and continues in stages as code is combined with other units of programming to form a software product,
+such as an operating system or an application.
+
+Bugs are often discovered after a product is released or during public beta testing.
+When this occurs, users have to find a way to avoid using the buggy code or get a patch from the software developers.
+
+A bug is just one kind of problem that a program can have. Programs can run bug-free and still be difficult to use or fail in some major objective.
+This kind of flaw is more difficult to test for. A well-designed program developed using a well-controlled process results in fewer bugs per thousands of lines of code. This is why it is important to include usability in testing.
+
+What is a conditional breakpoint?:
+Conditional breakpoints allow you to break inside the code when a specific expression that evaluates to true.
